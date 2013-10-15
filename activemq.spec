@@ -1,10 +1,11 @@
 Summary: Apache ActiveMQ
 Name: activemq
-Version: 5.5.0
+Version: 5.8.0
 Release: 1%{?dist}
-License: Apache
-Group: Network/Daemons
-Source0: apache-activemq-%{version}-bin.tar.gz
+License: ASL 2.0
+Group: System Environment/Daemons
+URL: http://activemq.apache.org/
+Source0: http://www.apache.org/dist/activemq/apache-activemq/%{version}/apache-activemq-%{version}-bin.tar.gz
 Source1: wlcg-patch.tgz
 Source2: activemq.xml
 Source3: jetty-realm.properties
@@ -73,10 +74,10 @@ install conf/activemq-httpd.conf ${RPM_BUILD_ROOT}/etc/httpd/conf.d
 install bin/activemq ${RPM_BUILD_ROOT}/etc/init.d
 
 # Bin and doc dirs
-install *.txt *.html ${RPM_BUILD_ROOT}%{docsdir}
+install *.txt *.html LICENSE NOTICE ${RPM_BUILD_ROOT}%{docsdir}
 cp -r docs ${RPM_BUILD_ROOT}%{docsdir}
 
-install bin/run.jar bin/activemq-admin ${RPM_BUILD_ROOT}%{homedir}/bin
+install bin/activemq.jar bin/activemq-admin ${RPM_BUILD_ROOT}%{homedir}/bin
 install --directory ${RPM_BUILD_ROOT}/usr/bin
 %{__ln_s} -f %{homedir}/bin/activemq-admin ${RPM_BUILD_ROOT}/usr/bin
 
@@ -127,7 +128,6 @@ fi
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-
 %files
 %defattr(-,root,root)
 %attr(755,root,root) /usr/bin/activemq-admin
@@ -147,6 +147,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{libexecdir}/info-provider-activemq
 
 %changelog
+* Tue Oct 15 2013 Melissa Stone <melissa@puppetlabs.com> - 5.8.0-1
+* Update for 5.8.0
+
 * Fri Sep 02 2011 Michael Stahnke <stahnma@fedoraproject.org> - 5.5.0-1
 - Update for 5.5.0
 
